@@ -8,6 +8,8 @@ import com.loading.neo4j.entity.Company;
 import com.loading.neo4j.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * desc:
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
  * @since 1.0.0
  */
 @Service
+@Transactional
 public class GraphService {
 
     @Autowired
@@ -25,19 +28,25 @@ public class GraphService {
 
     @Autowired
     private BasicRelationDao relationDao;
-
+    
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public <T extends BasicNode> T saveNode(T node){
         basicNodeDao.save(node);
         return node;
     }
-
+    
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public <T extends BasicRelation> T saveRelation(T relation){
         relationDao.save(relation);
         return relation;
     }
-
-    public void delete(long id){
+    
+    //@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
+    public void delete(long id) throws Exception{
         basicNodeDao.delete(id);
+        if(1<2) {
+        	throw new Exception("test exception");
+        }
     }
 
 }

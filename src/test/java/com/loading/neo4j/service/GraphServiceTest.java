@@ -1,18 +1,21 @@
 package com.loading.neo4j.service;
 
-import com.alibaba.fastjson.JSON;
-import com.loading.neo4j.dao.BasicNodeDao;
-import com.loading.neo4j.dao.CompanyDao;
-import com.loading.neo4j.dao.PersonDao;
-import com.loading.neo4j.entity.Basic.BasicNode;
-import com.loading.neo4j.entity.Company;
-import com.loading.neo4j.entity.InvestRelation;
-import com.loading.neo4j.entity.Person;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.alibaba.fastjson.JSON;
+import com.loading.neo4j.dao.BasicNodeDao;
+import com.loading.neo4j.dao.CompanyDao;
+import com.loading.neo4j.dao.PersonDao;
+import com.loading.neo4j.entity.Company;
+import com.loading.neo4j.entity.InvestRelation;
+import com.loading.neo4j.entity.Person;
+import com.loading.neo4j.entity.Basic.BasicNode;
 
 /**
  * desc:
@@ -25,7 +28,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 //@Transactional
-//@Rollback(true)
+//@Rollback(false)
 public class GraphServiceTest {
 
     @Autowired
@@ -96,7 +99,7 @@ public class GraphServiceTest {
 
     @Test
     public void delete() throws Exception {
-        graphService.delete(28L);
+        graphService.delete(198L);
     }
 
     @Test
@@ -116,5 +119,12 @@ public class GraphServiceTest {
         BasicNode node = basicNodeDao.findOne(34L, 1);
         System.out.println(JSON.toJSONString(node));
     }
-
+    
+    @Test
+    public void addPerson() {
+    	 Person personD = new Person();
+    	 personD.setNodeName("D Person");
+    	 personD.setAge(42);
+    	 basicNodeDao.save(personD);
+    }
 }
