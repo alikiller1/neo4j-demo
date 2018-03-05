@@ -1,9 +1,10 @@
 package com.loading.neo4j.dao;
 
-import com.loading.neo4j.entity.Basic.BasicNode;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
+
+import com.loading.neo4j.entity.Basic.BasicNode;
 
 
 /**
