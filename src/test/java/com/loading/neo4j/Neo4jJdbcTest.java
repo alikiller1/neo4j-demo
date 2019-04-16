@@ -20,9 +20,10 @@ public class Neo4jJdbcTest {
 		getConnection("jdbc:neo4j://localhost:7474/",*/
 				"neo4j", "123456");
 		Statement statement = conn.createStatement();
-		ResultSet resultSet = statement.executeQuery("MATCH p=(x)-[r*]->() where not ()-[]->(x)  RETURN p as path");
+		//ResultSet resultSet = statement.executeQuery("MATCH p=(x)-[r*]->() where not ()-[]->(x)  RETURN p as path");
+		ResultSet resultSet = statement.executeQuery("match(n) return n limit 10");
 		while (resultSet.next()) {
-			Object o=resultSet.getObject("path");
+			Object o=resultSet.getObject("n");
 			System.out.println(o);
 		}
 		resultSet.close();

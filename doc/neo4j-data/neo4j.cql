@@ -38,9 +38,9 @@ CREATE (emp:Employee{name="Anne"})-[r:underline{}]->(emp2:Employee{name:"Tnna"})
 match(boss:Employee{name:"Anne"})-[:underline]-(emp:Employee) return emp,boss
 
 只能使用新的database
-neo4j-admin import --mode csv --database=testdb --input-encoding=UTF-8 --nodes:Dog C:\Users\liuqinghua\Desktop\neo4j-data\dogs.csv --nodes:Person=C:\Users\liuqinghua\Desktop\neo4j-data\person.csv --relationships:relation=C:\Users\liuqinghua\Desktop\neo4j-data\relation.csv
-neo4j-admin import --mode csv --database=testdb --input-encoding=UTF-8 --nodes:Dog=C:\Users\liuqinghua\Desktop\neo4j-data\dogs.csv --nodes:Person=C:\Users\liuqinghua\Desktop\neo4j-data\person.csv
-neo4j-admin import --mode csv --database=testdb2 --input-encoding=UTF-8 --nodes:Dog C:\Users\liuqinghua\Desktop\neo4j-data\dogs.csv --nodes:Person=C:\Users\liuqinghua\Desktop\neo4j-data\person.csv --relationships=C:\Users\liuqinghua\Desktop\neo4j-data\r-header.csv,C:\Users\liuqinghua\Desktop\neo4j-data\r.csv
+neo4j-admin import --mode csv --database=testdb2 --ignore-duplicate-nodes=true --ignore-missing-nodes=true  --input-encoding=UTF-8 --nodes:Dog C:\Users\liuqinghua\Desktop\neo4j-data\dogs.csv --nodes:Person=C:\Users\liuqinghua\Desktop\neo4j-data\person.csv --relationships:relation=C:\Users\liuqinghua\Desktop\neo4j-data\relation.csv
+neo4j-admin import --mode csv --database=testdb2 --ignore-duplicate-nodes=true --ignore-missing-nodes=true --input-encoding=UTF-8 --nodes:Dog=C:\Users\liuqinghua\Desktop\neo4j-data\dogs.csv --nodes:Person=C:\Users\liuqinghua\Desktop\neo4j-data\person.csv
+neo4j-admin import --mode csv --database=testdb2 --ignore-duplicate-nodes=true --ignore-missing-nodes=true --input-encoding=UTF-8 --nodes:Dog C:\Users\liuqinghua\Desktop\neo4j-data\dogs.csv --nodes:Person=C:\Users\liuqinghua\Desktop\neo4j-data\person.csv --relationships=C:\Users\liuqinghua\Desktop\neo4j-data\r-header.csv,C:\Users\liuqinghua\Desktop\neo4j-data\r.csv
 
 --load,csv文件要放到neo4j_home\import目录下面
 USING PERIODIC COMMIT 10   
